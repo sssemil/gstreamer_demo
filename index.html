@@ -2,22 +2,27 @@
 <html>
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>gst-stream</title>
+    <meta charset=utf-8 />
+    <title>My live video</title>
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
 </head>
 
 <body>
-    <video id="testvideo" autoplay controls muted="muted">
-        <source src="file:///tmp/stream.ts">
-        Your browser does not support the video tag.
-    </video>
+    <h1>My live video - simple HLS player</h1>
+
+    <video-js id="video_id" class="vjs-default-skin" controls muted="muted" preload="auto" width="640" height="360">
+        <source src="http://192.168.178.20/stream/playlist.m3u8" type="application/x-mpegURL">
+    </video-js>
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
     <script>
-        var video = document.getElementById('testvideo')
-        video.addEventListener('loadeddata', function () {
-            video.currentTime = video.duration;
-            video.play();
+        var player = videojs('video_id');
+        player.play();
+        player.on('loadeddata', function () {
+            //player.currentTime(player.currentTime() + 100);
         });
     </script>
+
 </body>
 
 </html>
